@@ -167,6 +167,6 @@ git ls-files
 
 残りの検証作業は、リポジトリ内の TODO ファイルではなく GitHub Issues で管理します。
 
-- 撮影失敗時のテスト
-- 再起動後の LaunchAgent 動作確認
-- 長期安定稼働テスト
+- [撮影失敗時のテスト](https://github.com/Takemichi0/capture_screen/issues/1)
+- [再起動後の LaunchAgent 動作確認](https://github.com/Takemichi0/capture_screen/issues/2)
+- [長期安定稼働テスト](https://github.com/Takemichi0/capture_screen/issues/3)
