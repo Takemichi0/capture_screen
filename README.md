@@ -211,11 +211,3 @@ git ls-files
 ```
 
 日付ディレクトリやログに `git add -f` を使用しないでください。Private リポジトリを Public に変更すると、現在のファイルだけではなく、参照可能な Git 履歴内の全ファイルが公開されます。
-
-## プロジェクトの状態
-
-残りの検証作業は、リポジトリ内の TODO ファイルではなく GitHub Issues で管理します。
-
-- [撮影失敗時のテスト](https://github.com/Takemichi0/capture_screen/issues/1)
-- [再起動後の LaunchAgent 動作確認](https://github.com/Takemichi0/capture_screen/issues/2)
-- [長期安定稼働テスト](https://github.com/Takemichi0/capture_screen/issues/3)
