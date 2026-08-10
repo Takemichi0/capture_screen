@@ -4,6 +4,7 @@
 # Runtime state and logs
 .capture-paused
 *.log
+ScreenshotCaptureAgent.app/
 
 # Local agent settings
 .claude/settings.local.json
