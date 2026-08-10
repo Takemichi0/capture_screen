@@ -14,11 +14,7 @@ cd capture_screen
 ./install.sh
 ```
 
-インストール後、macOS から画面収録権限を求められた場合は、`システム設定 > プライバシーとセキュリティ > 画面収録` で許可します。権限を変更したら、次のコマンドでLaunchAgentを再登録します。
-
-```bash
-./install.sh
-```
+インストール後、macOS から画面収録権限を求められた場合は、`システム設定 > プライバシーとセキュリティ > 画面収録` で `ScreenshotCaptureAgent` を許可します。権限を変更したあとにインストーラーを再実行する必要はありません。次の定期実行から新しい権限が使われます。
 
 パスワード・秘密情報を扱うアプリを閉じた状態で、1回撮影して保存結果を開きます。
 
@@ -62,6 +58,7 @@ open "$(date "+%Y-%m-%d")"
 
 - macOS
 - LaunchAgent をインストールできるユーザーアカウント
+- Xcode または Xcode Command Line Tools（`xcrun swiftc`）
 - `screencapture` を実行するプロセスへの画面収録権限
 
 パッケージマネージャーやサードパーティー製ランタイムは必要ありません。
@@ -71,9 +68,10 @@ open "$(date "+%Y-%m-%d")"
 インストーラーは次の処理を行います。
 
 1. クローン先の絶対パスを自動検出する
-2. 現在のユーザー用に `~/Library/LaunchAgents/com.user.screencapture.plist` を生成する
-3. 現在の GUI セッションへ LaunchAgent を登録する
-4. 最初の撮影を開始する
+2. 画面収録権限を割り当てるための `ScreenshotCaptureAgent.app` をビルドして署名する
+3. 現在のユーザー用に `~/Library/LaunchAgents/com.user.screencapture.plist` を生成する
+4. 現在の GUI セッションへ LaunchAgent を登録する
+5. 最初の撮影を開始する
 
 macOS のバージョンによっては、画面収録権限の変更後にログアウトと再ログインが必要です。
 
@@ -97,6 +95,7 @@ capture_screen/
 │   ├── 2026-08-07_09-00-00.png
 │   └── 2026-08-07_09-05-00.png
 ├── capture.sh
+├── ScreenshotCaptureAgent.app
 ├── install.sh
 └── uninstall.sh
 ```
@@ -156,10 +155,10 @@ capture_screen/
 4. 登録済みのパスワード関連アプリが起動していない
 5. macOSの画面収録権限が許可されている
 
-権限を変更した場合は、LaunchAgentを再登録します。
+権限を変更した場合は、次の定期実行を待つか、LaunchAgent を手動で1回開始します。
 
 ```bash
-./install.sh
+launchctl kickstart -k "gui/$(id -u)/com.user.screencapture"
 ```
 
 ### LaunchAgent の確認
